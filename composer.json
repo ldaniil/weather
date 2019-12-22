@@ -1,0 +1,11 @@
+{
+    "name": "ldaniil/weather",
+    "description": "Weather application",
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/"
+        }
+    }
+}
