@@ -2,9 +2,9 @@
 
 namespace Core\Repository;
 
-use Core\Entity\Weather;
+use Core\Weather;
 use Core\Storage\Weather\StorageInterface;
-use Core\Strategy\Weather\AttributesOrder;
+use Core\Sorter\Weather\Attributes\AttributesSorter;
 
 /**
  * Class WeatherRepository
@@ -15,12 +15,12 @@ class WeatherRepository
     /**
      * @param Weather $weather
      * @param StorageInterface $storage
-     * @param AttributesOrder $order
+     * @param AttributesSorter $order
      * @return bool
      */
-    public function save(Weather $weather, StorageInterface $storage, AttributesOrder $order)
+    public function save(Weather $weather, StorageInterface $storage, AttributesSorter $sorter)
     {
-        $data = $order->sort($weather);
+        $data = $sorter->sort($weather);
 
         return $storage->save($data);
     }

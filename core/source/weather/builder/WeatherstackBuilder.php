@@ -2,12 +2,12 @@
 
 namespace Core\Source\Weather\Builder;
 
-use Core\Entity\Weather;
-use Core\Builder\Weather\WeatherBuilder;
+use Core\Weather;
+use Core\Source\Weather\BuilderInterface;
 
-class WeatherstackBuilder extends WeatherBuilder
+class WeatherstackBuilder implements BuilderInterface
 {
-    public function create($data) :Weather
+    public function build($data) :Weather
     {
         $data = json_decode($data, true);
 
@@ -15,14 +15,12 @@ class WeatherstackBuilder extends WeatherBuilder
             throw new \Exception('Api ' . get_class($this) . ' error: ' . $data['error']['info']);
         }
 
-        $attributes = [
-            'date' => $data['current']['observation_time'],
-            'location' => $data['location']['name'],
-            'temperature' => $data['current']['temperature'],
-            'windSpeed' => $data['current']['wind_speed'],
-            'windDirection' => $data['current']['wind_dir']
-        ];
-
-        return $this->build($attributes);
+        return new Weather(
+            $data['current']['observation_time'],
+            $data['location']['name'],
+            $data['current']['temperature'],
+            $data['current']['wind_speed'],
+            $data['current']['wind_dir']
+        );
     }
 }

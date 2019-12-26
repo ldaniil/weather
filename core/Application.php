@@ -5,7 +5,7 @@ namespace Core;
 use Core\Source\WeatherSource;
 use Core\Repository\WeatherRepository;
 use Core\Storage\Weather\StorageFactory;
-use Core\Strategy\Weather\AttributesOrder;
+use Core\Sorter\Weather\Attributes\AttributesSorter;
 
 /**
  * Class Application
@@ -37,13 +37,13 @@ class Application
     /**
      * @param WeatherSource $source
      * @param string $fileType
-     * @param AttributesOrder $order
+     * @param AttributesSorter $sorter
      */
-    public function run(WeatherSource $source, string $fileType, AttributesOrder $order)
+    public function run(WeatherSource $source, string $fileType, AttributesSorter $sorter)
     {
         $weather = $source->getWeather();
         $storage = $this->storageFactory->getStorage($fileType);
 
-        $this->repository->save($weather, $storage, $order);
+        $this->repository->save($weather, $storage, $sorter);
     }
 }

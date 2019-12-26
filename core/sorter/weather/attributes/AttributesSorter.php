@@ -1,14 +1,14 @@
 <?php
 
-namespace Core\Strategy\Weather;
+namespace Core\Sorter\Weather\Attributes;
 
-use Core\Entity\Weather;
+use Core\Weather;
 
 /**
- * Class AttributesOrder
- * @package Core\Strategy\Weather
+ * Class AttributesSorter
+ * @package Core\Sorter\Weather
  */
-class AttributesOrder
+class AttributesSorter
 {
     /**
      * @var AttributesOrderInterface
@@ -33,7 +33,7 @@ class AttributesOrder
     {
         $attributes = $this->order->sort($weather);
 
-        $diff = array_diff($weather->attributes, array_keys($attributes));
+        $diff = array_diff(array_keys($weather->toArray()), array_keys($attributes));
 
         if ($diff) {
             throw new \Exception('Order ' . get_class($this->order) . ' undefined attributes names: ' . implode(', ', $diff));

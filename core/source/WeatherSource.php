@@ -2,7 +2,7 @@
 
 namespace Core\Source;
 
-use Core\Entity\Weather;
+use Core\Weather;
 use Core\Source\Weather\FactoryInterface;
 
 /**
@@ -42,7 +42,7 @@ class WeatherSource
         $builer = $this->factory->getBuilder();
 
         $data = $source->getData($this->location);
-        return $builer->create($data);
+        return $builer->build($data);
     }
 
     /**

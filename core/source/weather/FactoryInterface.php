@@ -2,8 +2,6 @@
 
 namespace Core\Source\Weather;
 
-use Core\Builder\Weather\BuilderInterface;
-
 /**
  * Interface FactoryInterface
  * @package Core\Source\Weather

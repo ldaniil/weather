@@ -1,12 +1,12 @@
 <?php
 
-namespace Core\Strategy\Weather;
+namespace Core\Sorter\Weather\Attributes;
 
-use Core\Entity\Weather;
+use Core\Weather;
 
 /**
  * Interface AttributesOrderInterface
- * @package Core\Strategy\Weather
+ * @package Core\Sorter\Weather
  */
 interface AttributesOrderInterface
 {

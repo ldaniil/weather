@@ -2,9 +2,9 @@
 
 namespace Core\Source\Weather\Factory;
 
-use Core\Builder\Weather\BuilderInterface;
 use Core\Source\Weather\ApiInteface;
 use Core\Source\Weather\FactoryInterface;
+use Core\Source\Weather\BuilderInterface;
 use Core\Source\Weather\Api\WeatherstackApi;
 use Core\Source\Weather\Builder\WeatherstackBuilder;
 

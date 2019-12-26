@@ -2,7 +2,7 @@
 
 namespace Core\Storage\Weather;
 
-use Core\Entity\Weather;
+use Core\Weather;
 
 /**
  * Interface StorageInterface
