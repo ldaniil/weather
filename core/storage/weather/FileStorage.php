@@ -2,31 +2,68 @@
 
 namespace Core\Storage\Weather;
 
+use Core\Weather;
+use Core\Serializer\Weather\SerializerInterface;
+
+
 /**
  * Class FileStorage
  * @package Core\Storage\Weather
  */
-abstract class FileStorage implements StorageInterface
+class FileStorage implements StorageInterface
 {
-    protected $storageDir;
+    /**
+     * @var
+     */
+    protected $baseDir;
+
+    /**
+     * @var
+     */
+    protected $fileName;
+
+    /**
+     * @var SerializerInterface
+     */
+    protected $serializer;
 
     /**
      * FileStorage constructor.
-     * @param string $storageDir
+     * @param string $baseDir
+     * @param string $fileName
+     * @param SerializerInterface $serializer
      */
-    public function __construct(string $storageDir)
+    public function __construct(string $baseDir, string $fileName, SerializerInterface $serializer)
     {
-        $this->storageDir = $storageDir;
+        $this->baseDir = $baseDir;
+
+        $this
+            ->setFileName($fileName)
+            ->setSerializer($serializer);
     }
 
     /**
-     * @param $data
-     * @param $fileName
+     * @param Weather $weather
+     * @return bool
      */
-    final protected function write($data, $fileName)
+    public function save(Weather $weather) :bool
     {
-        $fp = fopen($this->storageDir . DIRECTORY_SEPARATOR . $fileName, 'w');
-        fwrite($fp, $data);
+        $fp = fopen($this->baseDir . DIRECTORY_SEPARATOR . $this->fileName, 'w');
+        fwrite($fp, $this->serializer->serialize($weather));
         fclose($fp);
+
+        return true;
+    }
+
+    public function setFileName(string $fileName)
+    {
+        $this->fileName = $fileName;
+        return $this;
+    }
+
+    public function setSerializer(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+        return $this;
     }
 }

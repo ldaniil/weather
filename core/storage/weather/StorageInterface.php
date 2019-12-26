@@ -14,5 +14,5 @@ interface StorageInterface
      * @param Weather $wheather
      * @return bool
      */
-    public function save(array $weather) :bool;
+    public function save(Weather $weather) :bool;
 }
